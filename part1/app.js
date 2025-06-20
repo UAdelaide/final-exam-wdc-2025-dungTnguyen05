@@ -78,7 +78,7 @@ app.get('api/walkers/summary', async (req, res) => {
             LEFT JOIN
                 WalkApplications wa ON u.user_id = wa.walker_id AND wa.status = 'accepted'
             LEFT JOIN
-                WalkRequests wreq ON wa.request_id = 
+                WalkRequests wreq ON wa.request_id = wreq.request_id
         `);
 
     }
