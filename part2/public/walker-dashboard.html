@@ -45,6 +45,21 @@
         const error = ref('');
         const user = 3;
 
+        async function checkAuthentication() {
+          try {
+            const res = await fetch('/api/users/me');
+            if (!res.ok) {
+              // Session expired or not logged in
+              window.location.href = '/';
+              return false;
+            }
+            return true;
+          } catch (err) {
+            window.location.href = '/';
+            return false;
+          }
+        }
+
         async function loadWalkRequests() {
           try {
             const res = await fetch('/api/walks');
@@ -75,7 +90,11 @@
         }
 
         onMounted(() => {
-          loadWalkRequests();
+          checkAuthentication().then(isAuthenticated => {
+            if (isAuthenticated) {
+              loadWalkRequests();
+            }
+          });
         });
 
         return {
