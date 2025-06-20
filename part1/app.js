@@ -20,6 +20,8 @@ app.use('/users', usersRouter);
 
 // 1. /api/dogs
 
-// 2. /api/walkrequest
+// 2. /api/walkrequests/open
+
+// 3. /api/walkers/summary
 
 module.exports = app;
