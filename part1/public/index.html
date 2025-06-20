@@ -74,6 +74,25 @@
         </div>
     </div>
 
-    <script
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    dogImage: '',
+                    dogName: 'Fluffy',
+                    buttonActive: false
+                };
+            },
+            mounted() {
+                this.fetchDogImage();
+
+                // Button only works after 3 second delay (cognitive load)
+                setTimeout(() => {
+                    this.buttonActive = true;
+                }, 3000);
+            },
+    </script>
 </body>
 </html>
