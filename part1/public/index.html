@@ -63,12 +63,12 @@
             </div>
 
             <div class="form-group">
-                <!-- -->
                 <label for="email">Email:</label>
                 <input type="email" id="email">
             </div>
 
             <div class="form-group">
+                <!-- -->
                 <button type="button" @click="submitForm" :disabled="!buttonActive">Submit</button>
                 <p v-if="!buttonActive">Please wait...</p>
             </div>
