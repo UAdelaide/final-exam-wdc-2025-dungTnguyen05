@@ -81,6 +81,8 @@ app.get('api/walkers/summary', async (req, res) => {
                 WalkRequests wreq ON wa.request_id = wreq.request_id
             LEFT JOIN
                 WalkRatings wr ON wreq.request_id = wr.request_id AND u.user_id = wr.walker_id
+            WHERE
+                u.role = 'walker'
         `);
 
     }
