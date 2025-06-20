@@ -38,7 +38,7 @@ app.get('/api/dogs', async (req, res) => {
     }
 
     catch (error) {
-
+        console.error()
     }
 });
 
