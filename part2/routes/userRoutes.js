@@ -35,7 +35,7 @@ router.get('/me', (req, res) => {
   res.json(req.session.user);
 });
 
-// POST login (dummy version)
+// POST login (Q13)
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -57,5 +57,7 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Login failed' });
   }
 });
+
+
 
 module.exports = router;
