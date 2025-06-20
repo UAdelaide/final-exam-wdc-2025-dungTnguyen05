@@ -31,7 +31,11 @@ app.get('/api/dogs', async (req, res) => {
 });
 
 // 2. /api/walkrequests/open
-app.get('/api/walkrequests/open')
+app.get('/api/walkrequests/open', async (req, res) => {
+
+});
+
 // 3. /api/walkers/summary
+app.get('api/')
 
 module.exports = app;
