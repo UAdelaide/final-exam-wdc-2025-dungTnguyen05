@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
     // Store user in session
     req.session.user = rows[0];
 
-    res.json({ message: 'Login successful', user: rows[0] });
+    res.json({ message: 'Login successful', user: rows[0], redirectUrl: rows[0].role === 'owner' ? '/owner-dashboard.html' : '/walker-dashboard.html'});
   } catch (error) {
     res.status(500).json({ error: 'Login failed' });
   }
