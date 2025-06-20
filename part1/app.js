@@ -59,7 +59,7 @@ app.get('/api/walkrequests/open', async (req, res) => {
     }
 
     catch (error) {
-        console.error('Error fetching ')
+        console.error('Error fetching open walk requests: ', error);
     }
 });
 
