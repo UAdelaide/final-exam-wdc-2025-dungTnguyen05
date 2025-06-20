@@ -29,7 +29,7 @@ const pool = mysql.createPool({
 app.get('/api/dogs', async (req, res) => {
     try {
         const [rows] = await pool.query(`
-            SELECT 
+            SELECT d.name AS 
         `);
 
         res.json(rows);
