@@ -83,6 +83,8 @@ app.get('api/walkers/summary', async (req, res) => {
                 WalkRatings wr ON wreq.request_id = wr.request_id AND u.user_id = wr.walker_id
             WHERE
                 u.role = 'walker'
+            GROUP BY
+                u.user_id
         `);
 
     }
