@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     const user = req.session.user;
 
     if (user.role === 'owner') {
-      // Owners see only their own walk requests (all statuses)
+      // Owners see only their own walk requests
       const [rows] = await db.query(`
         SELECT wr.*, d.name AS dog_name, d.size, u.username AS owner_name
         FROM WalkRequests wr
