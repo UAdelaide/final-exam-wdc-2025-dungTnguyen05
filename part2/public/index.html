@@ -106,7 +106,7 @@
         async function loadDogs() {
           try {
             dogsLoading.value = true;
-            const response = await fetch('/api/dogs');
+            const response = await fetch('/api/users/all-dogs');
             if (!response.ok) {
               throw new Error('Failed to fetch dogs');
             }
