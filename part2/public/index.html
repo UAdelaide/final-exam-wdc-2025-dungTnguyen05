@@ -115,7 +115,7 @@
             }
             const dogsData = await response.json();
 
-            // Add random photos to each dog
+            // Add random photo to each dog
             for (let dog of dogsData) {
               dog.photo = await getRandomDogPhoto();
             }
