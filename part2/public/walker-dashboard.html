@@ -46,7 +46,19 @@
         const walks = ref([]);
         const message = ref('');
         const error = ref('');
-        const user = 3;
+
+        async function getCurrentUser() {
+          try {
+            const res = await fetch('/api/users/me');
+            if (!res.ok) {
+              throw new Error('Failed to get current user');
+            }
+            const userData = await res.json();
+            return userData.user_id;
+          } catch (err) {
+            throw new Error('Could not get current user ID');
+          }
+        }
 
         async function checkAuthentication() {
           try {
@@ -75,10 +87,11 @@
 
         async function applyToWalk(requestId) {
           try {
+            const currentUserId = await getCurrentUser();
             const res = await fetch(`/api/walks/${requestId}/apply`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ walker_id: user })
+              body: JSON.stringify({ walker_id: currentUserId })
             });
             const result = await res.json();
 
