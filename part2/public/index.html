@@ -32,6 +32,47 @@
 
       </div>
     </div>
+
+    <!-- Dogs Table -->
+    <div class="card mt-4">
+      <div class="card-header bg-info text-white">
+        <h3 class="mb-0">Our Dogs</h3>
+      </div>
+      <div class="card-body">
+        <div v-if="dogsError" class="alert alert-danger">{{ dogsError }}</div>
+        <div v-if="dogsLoading" class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        <div v-else-if="dogs.length > 0" class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Dog Name</th>
+                <th>Size</th>
+                <th>Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="dog in dogs" :key="dog.dog_name + dog.owner_username">
+                <td>
+                  <img v-if="dog.photo" :src="dog.photo" alt="Dog photo" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover;">
+                  <div v-else class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading photo...</span>
+                  </div>
+                </td>
+                <td>{{ dog.dog_name }}</td>
+                <td>{{ dog.size }}</td>
+                <td>{{ dog.owner_username }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p v-else>No dogs found.</p>
+      </div>
+    </div>
   </div>
 
   <script>
