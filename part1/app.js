@@ -25,6 +25,8 @@ const pool = mysql.createPool({
     database: 'DogWalkService'
 });
 
+pool.connect()
+
 // 1. /api/dogs
 
 // 2. /api/walkrequests/open
