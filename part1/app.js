@@ -19,7 +19,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 const pool = mysql.createPool({
-
+    host: 'localhost',
+    
 });
 // 1. /api/dogs
 
