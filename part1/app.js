@@ -18,7 +18,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-const pool = mysql.cr
+const pool = mysql.createPool({
+
+});
 // 1. /api/dogs
 
 // 2. /api/walkrequests/open
