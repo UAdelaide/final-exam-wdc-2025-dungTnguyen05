@@ -88,7 +88,7 @@ router.get('/dogs', async (req, res) => {
   }
 });
 
-// GET all dogs (for homepage display)
+// GET all dogs (Q17)
 router.get('/all-dogs', async (req, res) => {
   try {
     const [rows] = await db.query(`
