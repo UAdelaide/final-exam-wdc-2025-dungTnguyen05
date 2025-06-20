@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // Session middleware
 app.use(session({
-    cookie: {maxAge: 60000}
+    cookie: { secure: false, maxAge: 60000 }
 }));
 
 // Routes
