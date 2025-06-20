@@ -37,7 +37,7 @@ router.get('/me', (req, res) => {
 
 // POST login (Q13)
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password } = req.body; // Change email -> username
 
   try {
     const [rows] = await db.query(`
