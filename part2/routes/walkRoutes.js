@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
         JOIN Dogs d ON wr.dog_id = d.dog_id
         JOIN Users u ON d.owner_id = u.user_id
         WHERE u.user_id = ?
-        ORDER BY wr.created_at DESC
       `, [user.user_id]);
       res.json(rows);
     } else if (user.role === 'walker') {
@@ -31,7 +30,6 @@ router.get('/', async (req, res) => {
         JOIN Dogs d ON wr.dog_id = d.dog_id
         JOIN Users u ON d.owner_id = u.user_id
         WHERE wr.status = 'open'
-        ORDER BY wr.created_at DESC
       `);
       res.json(rows);
     } else {
