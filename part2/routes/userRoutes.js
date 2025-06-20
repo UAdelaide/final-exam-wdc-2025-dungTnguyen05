@@ -69,7 +69,7 @@ router.post('/logout', (req, res) => {
   });
 });
 
-// GET user's dogs
+// GET user's dogs (Q15)
 router.get('/dogs', async (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ error: 'Not authenticated' });
