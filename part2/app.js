@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(session({
     secret: '',
     resave: false,
+    saveUninitialized: false,
     cookie: { secure: false, maxAge: 60000 }
 }));
 
