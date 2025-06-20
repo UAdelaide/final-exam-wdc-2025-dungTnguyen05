@@ -18,6 +18,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// 1. 
+// 1. /api/dogs
+
+// 2. /api/walkrequest
 
 module.exports = app;
