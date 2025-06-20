@@ -27,10 +27,11 @@ const pool = mysql.createPool({
 
 // 1. /api/dogs
 app.get('/api/dogs', async (req, res) => {
-    
-})
-// 2. /api/walkrequests/open
 
+});
+
+// 2. /api/walkrequests/open
+app.get('/api/walkrequests/open')
 // 3. /api/walkers/summary
 
 module.exports = app;
