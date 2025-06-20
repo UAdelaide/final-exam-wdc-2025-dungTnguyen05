@@ -2,17 +2,41 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/db');
 
-// GET all walk requests (for walkers to view)
+// GET walk requests (different data based on user role)
 router.get('/', async (req, res) => {
   try {
-    const [rows] = await db.query(`
-      SELECT wr.*, d.name AS dog_name, d.size, u.username AS owner_name
-      FROM WalkRequests wr
-      JOIN Dogs d ON wr.dog_id = d.dog_id
-      JOIN Users u ON d.owner_id = u.user_id
-      WHERE wr.status = 'open'
-    `);
-    res.json(rows);
+    // Check if user is logged in
+    if (!req.session.user) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+
+    const user = req.session.user;
+
+    if (user.role === 'owner') {
+      // Owners see only their own walk requests (all statuses)
+      const [rows] = await db.query(`
+        SELECT wr.*, d.name AS dog_name, d.size, u.username AS owner_name
+        FROM WalkRequests wr
+        JOIN Dogs d ON wr.dog_id = d.dog_id
+        JOIN Users u ON d.owner_id = u.user_id
+        WHERE u.user_id = ?
+        ORDER BY wr.created_at DESC
+      `, [user.user_id]);
+      res.json(rows);
+    } else if (user.role === 'walker') {
+      // Walkers see only open walk requests from all owners
+      const [rows] = await db.query(`
+        SELECT wr.*, d.name AS dog_name, d.size, u.username AS owner_name
+        FROM WalkRequests wr
+        JOIN Dogs d ON wr.dog_id = d.dog_id
+        JOIN Users u ON d.owner_id = u.user_id
+        WHERE wr.status = 'open'
+        ORDER BY wr.created_at DESC
+      `);
+      res.json(rows);
+    } else {
+      res.status(403).json({ error: 'Invalid user role' });
+    }
   } catch (error) {
     console.error('SQL Error:', error);
     res.status(500).json({ error: 'Failed to fetch walk requests' });
