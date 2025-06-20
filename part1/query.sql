@@ -11,3 +11,5 @@ INSERT INTO Dogs (name, size, owner_id) VALUES
 ('dotrung', 'large', (SELECT user_id FROM Users WHERE username = 'tridung')),
 ('dog1', 'medium', (SELECT user_id FROM Users WHERE username = 'tridung')),
 ('dog2', 'medium', (SELECT user_id FROM Users WHERE username = 'tridung'));
+
+INSERT INTO Walk
