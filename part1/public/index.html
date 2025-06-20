@@ -68,7 +68,6 @@
             </div>
 
             <div class="form-group">
-                <!-- cognitive load: button that only works after 30-second delay -->
                 <button type="button" @click="submitForm" :disabled="!buttonActive">Submit</button>
                 <p v-if="!buttonActive">Please wait...</p>
             </div>
@@ -95,7 +94,7 @@
             mounted() {
                 this.fetchDogImage();
 
-                // cognitive load: button only
+                // cognitive load: button that only works after 30-second delay
                 setTimeout(() => {
                     this.buttonActive = true;
                 }, 30000);
