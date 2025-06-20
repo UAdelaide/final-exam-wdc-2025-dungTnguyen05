@@ -20,8 +20,11 @@ app.use('/users', usersRouter);
 
 const pool = mysql.createPool({
     host: 'localhost',
-    
+    user: 'root',
+    password: '',
+    database: 'DogWalkService'
 });
+
 // 1. /api/dogs
 
 // 2. /api/walkrequests/open
