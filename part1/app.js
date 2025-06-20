@@ -36,6 +36,8 @@ app.get('/api/walkrequests/open', async (req, res) => {
 });
 
 // 3. /api/walkers/summary
-app.get('api/')
+app.get('api/walkers/summary', async (req, res) => {
+
+});
 
 module.exports = app;
