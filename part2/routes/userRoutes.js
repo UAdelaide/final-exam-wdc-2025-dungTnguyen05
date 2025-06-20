@@ -58,10 +58,4 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Logout (Q13)
-router.post('/logout', (req, res) => {
-  req.session.destroy();
-  res.json({ message: 'Logged out successfully' });
-});
-
 module.exports = router;
