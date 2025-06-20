@@ -35,25 +35,6 @@ router.get('/me', (req, res) => {
   res.json(req.session.user);
 });
 
-// GET user's dogs
-router.get('/dogs', async (req, res) => {
-  if (!req.session.user) {
-    return res.status(401).json({ error: 'Not authenticated' });
-  }
-
-  try {
-    const [rows] = await db.query(`
-      SELECT dog_id, name, size FROM Dogs
-      WHERE owner_id = ?
-    `, [req.session.user.user_id]);
-
-    res.json(rows);
-  } catch (error) {
-    console.error('SQL Error:', error);
-    res.status(500).json({ error: 'Failed to fetch dogs' });
-  }
-});
-
 // POST login (Q13)
 router.post('/login', async (req, res) => {
   const { username, password } = req.body; // Change email -> username
@@ -86,6 +67,25 @@ router.post('/logout', (req, res) => {
     }
     res.json({ message: 'Logout successful' });
   });
+});
+
+// GET user's dogs
+router.get('/dogs', async (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ error: 'Not authenticated' });
+  }
+
+  try {
+    const [rows] = await db.query(`
+      SELECT dog_id, name, size FROM Dogs
+      WHERE owner_id = ?
+    `, [req.session.user.user_id]);
+
+    res.json(rows);
+  } catch (error) {
+    console.error('SQL Error:', error);
+    res.status(500).json({ error: 'Failed to fetch dogs' });
+  }
 });
 
 module.exports = router;
