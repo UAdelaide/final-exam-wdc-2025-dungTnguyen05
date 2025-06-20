@@ -94,7 +94,7 @@
                     this.buttonActive = true;
                 }, 3000);
             },
-            
+
             methods: {
                 fetchDogImage() {
                     fetch('https://dog.ceo/api/breeds/image/random')
@@ -106,9 +106,11 @@
                             console.error('Error fetching dog image:', error);
                         });
                 },
+
                 handleImageError() {
                     this.dogImage = 'https://via.placeholder.com/200';
                 },
+
                 submitForm() {
                     alert('Form submitted!');
                 }
