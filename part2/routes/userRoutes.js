@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// POST logout
+// POST logout (Q14)
 router.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
