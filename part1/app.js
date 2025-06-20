@@ -26,7 +26,9 @@ const pool = mysql.createPool({
 });
 
 // 1. /api/dogs
-app.get('/api/dogs', async (this.request, res))
+app.get('/api/dogs', async (req, res) => {
+    
+})
 // 2. /api/walkrequests/open
 
 // 3. /api/walkers/summary
