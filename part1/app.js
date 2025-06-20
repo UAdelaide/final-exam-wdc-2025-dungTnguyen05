@@ -91,7 +91,7 @@ app.get('api/walkers/summary', async (req, res) => {
     }
 
     catch (error) {
-        console.error('Error fetching open walk requests: ', error);
+        console.error('Error fetching walker summary: ', error);
         res.status(500).json( { error: 'Failed to fetch open walk requests' });
     }
 });
