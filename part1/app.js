@@ -46,6 +46,7 @@ app.get('/api/dogs', async (req, res) => {
 // 2. /api/walkrequests/open
 app.get('/api/walkrequests/open', async (req, res) => {
     try {
+        
     }
 
     catch (error) {
