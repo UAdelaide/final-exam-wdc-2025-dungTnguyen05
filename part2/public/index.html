@@ -98,14 +98,14 @@
           try {
             const response = await fetch('https://dog.ceo/api/breeds/image/random');
             const data = await response.json();
-            return data.message; // This contains the image URL
+            return data.message;
           } catch (error) {
             console.error('Error fetching dog photo:', error);
             return null;
           }
         }
 
-        // Function to load dogs from API (Q17)
+        // Load dogs from API (Q17)
         async function loadDogs() {
           try {
             dogsLoading.value = true;
