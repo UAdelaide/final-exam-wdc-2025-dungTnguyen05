@@ -87,10 +87,12 @@ app.get('api/walkers/summary', async (req, res) => {
                 u.user_id
         `);
 
+        res.json(rows);
     }
 
     catch (error) {
-
+        console.error('Error fetching open walk requests: ', error);
+        res.status(500).json( { error: 'Failed to fetch open walk requests' });
     }
 });
 
