@@ -77,7 +77,6 @@ app.get('/api/walkers/summary', async (req, res) => {
                     ELSE NULL
                 END AS average_rating,
                 COALESCE(COUNT(DISTINCT completed_walks.request_id), 0) AS completed_walks
-
             FROM
                 Users u
             LEFT JOIN
