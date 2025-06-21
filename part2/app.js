@@ -14,7 +14,7 @@ app.use(session({
     secret: 'DogWalkService',
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false, maxAge: 60000 } // 1-min session
+    cookie: { secure: false, maxAge: 1800000 } // 30-min session
 }));
 
 // Routes
