@@ -68,27 +68,23 @@ app.get('/api/walkrequests/open', async (req, res) => {
 app.get('/api/walkers/summary', async (req, res) => {
     try {
         const [rows] = await pool.query(`
-            SELECT
-                u.username AS walker_username,
-                COUNT(wr_ratings.rating) AS total_ratings,
-                CASE
-                    WHEN COUNT(wr_ratings.rating) > 0
-                    THEN AVG(wr_ratings.rating)
-                    ELSE NULL
-                END AS average_rating,
-                COALESCE(COUNT(DISTINCT completed_walks.request_id), 0) AS completed_walks
-            FROM
-                Users u
-            LEFT JOIN
-                WalkApplications wa ON u.user_id = wa.walker_id AND wa.status = 'accepted'
-            LEFT JOIN
-                WalkRequests completed_walks ON wa.request_id = completed_walks.request_id AND completed_walks.status = 'completed'
-            LEFT JOIN
-                WalkRatings wr_ratings ON completed_walks.request_id = wr_ratings.request_id AND wr_ratings.walker_id = u.user_id
-            WHERE
-                u.role = 'walker'
-            GROUP BY
-                u.user_id, u.username
+            SELECT u.username AS walker_username,
+                   COUNT(wr.rating) AS total_ratings,
+                   CASE
+                       WHEN COUNT(wr.rating) > 0
+                       THEN AVG(wr.rating)
+                       ELSE NULL
+                   END AS average_rating,
+                   COALESCE(COUNT(DISTINCT cw.request_id), 0) AS completed_walks
+            FROM Users u
+                 LEFT JOIN WalkApplications wa ON u.user_id = wa.walker_id
+                                               AND wa.status = 'accepted'
+                 LEFT JOIN WalkRequests cw ON wa.request_id = cw.request_id
+                                           AND cw.status = 'completed'
+                 LEFT JOIN WalkRatings wr ON cw.request_id = wr.request_id
+                                          AND wr.walker_id = u.user_id
+            WHERE u.role = 'walker'
+            GROUP BY u.user_id, u.username
         `);
 
         res.json(rows);
