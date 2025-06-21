@@ -70,10 +70,10 @@ app.get('/api/walkers/summary', async (req, res) => {
         const [rows] = await pool.query(`
             SELECT
                 u.username AS walker_username,
-                COUNT(wr_ratings.rating) AS total_ratings,
+                COUNT(wr.rating) AS total_ratings,
                 CASE
-                    WHEN COUNT(wr_ratings.rating) > 0
-                    THEN AVG(wr_ratings.rating)
+                    WHEN COUNT(wr.rating) > 0
+                    THEN AVG(wr.rating)
                     ELSE NULL
                 END AS average_rating,
                 COALESCE(COUNT(DISTINCT completed_walks.request_id), 0) AS completed_walks
