@@ -69,6 +69,20 @@
               window.location.href = '/';
               return false;
             }
+
+            const userData = await res.json();
+
+            // Check if user has the correct role for this dashboard
+            if (userData.role !== 'walker') {
+              // User is not a walker, redirect to appropriate dashboard
+              if (userData.role === 'owner') {
+                window.location.href = '/owner-dashboard.html';
+              } else {
+                window.location.href = '/';
+              }
+              return false;
+            }
+
             return true;
           } catch (err) {
             window.location.href = '/';
