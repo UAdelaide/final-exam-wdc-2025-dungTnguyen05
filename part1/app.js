@@ -76,7 +76,7 @@ app.get('/api/walkers/summary', async (req, res) => {
                     THEN AVG(wr.rating)
                     ELSE NULL
                 END AS average_rating,
-                COALESCE(COUNT(DISTINCT completed_walks.request_id), 0) AS completed_walks
+                COALESCE(COUNT(DISTINCT cw.request_id), 0) AS completed_walks
             FROM
                 Users u
             LEFT JOIN
