@@ -70,21 +70,20 @@ app.get('/api/walkers/summary', async (req, res) => {
         const [rows] = await pool.query(`
             SELECT
                 u.username AS walker_username,
-                COUNT(wr.rating_id) AS total_ratings,
-                AVG(wr.rating) AS average_rating,
-                COUNT(DISTINCT CASE WHEN wreq.status = 'completed' THEN wa.request_id END) AS completed_walks
-            FROM
-                Users u
-            LEFT JOIN
-                WalkApplications wa ON u.user_id = wa.walker_id AND wa.status = 'accepted'
-            LEFT JOIN
-                WalkRequests wreq ON wa.request_id = wreq.request_id
-            LEFT JOIN
-                WalkRatings wr ON wreq.request_id = wr.request_id AND u.user_id = wr.walker_id
-            WHERE
-                u.role = 'walker'
-            GROUP BY
-                u.user_id
+                COUNT(wr_ratings.rating) AS total_ratings,
+                CASE
+                    WHEN COUNT(wr_ratings.rating) > 0
+                    THEN AVG(wr_ratings.rating)
+                    ELSE NULL
+                END AS average_rating,
+                COALESCE(COUNT(DISTINCT completed_walks.request_id), 0) AS completed_walks
+            FROM Users u
+            LEFT JOIN WalkApplications wa ON u.user_id = wa.walker_id AND wa.status = 'accepted'
+            LEFT JOIN WalkRequests completed_walks ON wa.request_id = completed_walks.request_id AND completed_walks.status = 'completed'
+            LEFT JOIN WalkRatings wr_ratings ON completed_walks.request_id = wr_ratings.request_id AND wr_ratings.walker_id = u.user_id
+            WHERE u.role = 'walker'
+            GROUP BY u.user_id, u.username
+            ORDER BY u.username
         `);
 
         res.json(rows);
