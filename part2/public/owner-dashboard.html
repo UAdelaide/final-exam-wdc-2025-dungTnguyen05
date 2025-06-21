@@ -97,20 +97,6 @@
               window.location.href = '/';
               return false;
             }
-
-            const userData = await res.json();
-
-            // Check if user has the correct role for this dashboard
-            if (userData.role !== 'owner') {
-              // User is not an owner, redirect to appropriate dashboard
-              if (userData.role === 'walker') {
-                window.location.href = '/walker-dashboard.html';
-              } else {
-                window.location.href = '/';
-              }
-              return false;
-            }
-
             return true;
           } catch (err) {
             window.location.href = '/';
