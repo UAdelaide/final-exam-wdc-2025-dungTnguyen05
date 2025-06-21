@@ -88,8 +88,8 @@ app.get('/api/walkers/summary', async (req, res) => {
                 WalkRatings wr_ratings ON completed_walks.request_id = wr_ratings.request_id AND wr_ratings.walker_id = u.user_id
             WHERE
                 u.role = 'walker'
-                         GROUP BY
-                 u.user_id, u.username
+            GROUP BY
+                u.user_id, u.username
         `);
 
         res.json(rows);
